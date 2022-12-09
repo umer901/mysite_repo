@@ -1,0 +1,51 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if messages %}
+        {% for message in messages %}
+                <h3>!{{ message }}!</h3>
+        {% endfor %}
+    {% endif %}
+
+    <br><br>
+<h1>Course Enrollment Sytem</h1>
+
+{% if user.is_authenticated %}
+<p>Welcome, {{request.user.first_name}} </p>
+<p>Name: {{request.user.first_name}} {{request.user.last_name}}</p>
+<p>Username: {{request.user.username}}</p>
+
+<h1>Your Enrolled Courses Here</h1>
+    {% for x in q2 %}
+    <p>{{ x.course_name }}, {{ x.section_name }} ,{{ x.start_time }}:00 to {{ x.end_time }}:00 </p>
+    <td><a href="delete/{{x.id}}">drop</a></td>
+    {% endfor %}
+
+<h1>Courses you have been offered: </h1>
+        {% for course in q3 %}
+        {{ course.instructor_ID }}
+        <h2 class="card-title">{{ course.course_name }}</h2>
+			<p>Section: {{ course.section_name }}</p>
+			<p>Credit Hours: {{ course.credit_hours }}</p>
+			<p>Department Name: {{ course.department_name }}</p>
+			<p>Timeslot: {{ course.start_time }}:00 to {{ course.end_time }}:00</p>
+			<td><a href="accept/{{ course.section_id }}/{{ course.course_ID }}/{{ course.instructor_ID }}">accept</a></td>
+        {% endfor %}
+
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+  <h2>List of all students</h2>
+    {% for x in query %}
+    <p>{{ x.student_name }}</p>
+{% endfor %}
+{% endif %}
+{% endblock %}

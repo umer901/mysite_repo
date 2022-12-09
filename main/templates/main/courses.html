@@ -1,0 +1,50 @@
+{% extends "main/base.html" %}
+
+{% if messages %}
+        {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+{% block content %}
+<br><br>
+	{% if searched %}
+		<h1>You Searched For {{ searched }}</h1>
+		<br/>
+		{% for course in Courses %}
+		
+		<div class="card">
+		<div class="card-header">
+		</div>
+		<div class="card-body">
+			{% if Dep.last_name == 'Department' %}
+			{% if course.department_name == Dep.first_name %}
+			<h2 class="card-title">{{ course.course_name }}</h2>
+			<p>Section: {{ course.section_name }}</p>
+			<p>Taught By: {{ course.instructor_name }}</p>
+			<p>Credit Hours: {{ course.credit_hours }}</p>
+			<p>Department Name: {{ course.department_name }}</p>
+			<p>Timeslot: {{ course.start_time }}:00 to {{ course.end_time }}:00</p>
+			<p>Location: {{ course.building_name }}, Room Number: {{ course.room_number }}</p>
+			<td><a href="offerform/{{ course.section_ID }}">offer</a></td>
+			<td><a href="edit/{{ course.section_ID }}">edit timeslots</a></td>
+			{% endif %}
+			{% else %}
+			<h2 class="card-title">{{ course.course_name }}</h2>
+			<p>Section: {{ course.section_name }}</p>
+			<p>Taught By: {{ course.instructor_name }}</p>
+			<p>Credit Hours: {{ course.credit_hours }}</p>
+			<p>Department Name: {{ course.department_name }}</p>
+			<p>Timeslot: {{ course.start_time }}:00 to {{ course.end_time }}:00</p>
+			<p>Location: {{ course.building_name }}, Room Number: {{ course.room_number }}</p>
+			<td><a href="addrecord/{{ course.section_ID }}/{{ course.start_time }}">add</a></td>
+			{% endif %}
+			<p class="card-text">
+
+		{% endfor %}
+	
+	{% else %}
+		<h1>You Forgot To Search For A Course</h1>
+	{% endif %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+
+{% if messages %}
+        {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+{% block content %}
+
+<br><br>
+<h1>Update Info for these Students </h1>
+
+{% for x in query %}
+    <h2 class="card-title">{{ x.student_name }}</h2>
+			<p>Department: {{ x.department_name }}</p>
+			<p>Major: {{ x.major }}</p>
+			<p>Batch Year: {{ x.batch_year }}</p>
+            <p>Total Credit Hours: {{ x.total_credithours }}</p>
+            <td><a href="editstudentform/{{ x.student_id }}">Edit Information</a></td>
+			<p class="card-text">
+{% endfor %}
+
+
+{%endblock%}

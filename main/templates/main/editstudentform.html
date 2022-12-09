@@ -1,0 +1,35 @@
+{% extends "main/base.html" %}
+
+{% if messages %}
+        {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+{% block content %}
+
+<br><br>
+<h1>Update Student Info {{id}}</h1>
+{% for x in student %}
+<h2> Student Name : {{x.student_name}}</h2>
+
+<form action="editstu/{{ id }}" method="post">
+    <!-- {% csrf_token %}
+    Major:<br>
+    <input name="major" value="{{ x.major }}">
+    <br><br> -->
+
+    Total Credit Hours:<br>
+    <input name="total_credithours" value="{{ x.total_credithours }}">
+    <br><br>
+
+    Batch Year:<br>
+    <input name="batch_year" value="{{ x.batch_year }}">
+    <br><br>
+
+    <input type="submit" value="Submit">
+    </form>
+
+{% endfor %}
+
+{%endblock%}

@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+
+{% if messages %}
+        {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+{% block content %}
+
+<br><br>
+<h1>Update Course Information</h1>
+
+
+{% for x in course %}
+{% csrf_token %}
+Course:<br>
+<td><a href="updateform/{{x.course_id}}/{{id}}">{{x.course_name }} by {{ x.instructor_name }}</a></td>
+<br><br>
+
+
+{% endfor %}
+
+{%endblock%}

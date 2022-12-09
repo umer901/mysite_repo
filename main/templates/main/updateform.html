@@ -1,0 +1,30 @@
+{% extends "main/base.html" %}
+
+{% if messages %}
+        {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+{% block content %}
+
+<br><br>
+<h1>Update This Course</h1>
+<form action="updaterecord/{{ ch.course_id }}" method="post">
+    {% csrf_token %}
+    Credit Hours:<br>
+    <input name="credit_hours" value="{{ ch.credit_hours }}">
+    <br><br>
+
+    Pre Requisite:<br>
+    <input name="prereq" value="{{ pr.prereq }}">
+    <br><br>
+
+    Add Description to the Course:<br>
+    <input name="course_info" value="{{ ci.course_info }}">
+    <br><br>
+    <input type="submit" value="Submit">
+    </form>
+
+
+{%endblock%}

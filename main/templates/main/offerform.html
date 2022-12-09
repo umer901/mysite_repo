@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+
+{% if messages %}
+        {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+{% block content %}
+
+{% for x in query %}
+<br><br>
+<h1>Offer This Course to Instructor</h1>
+<p>{{x.section_ID}}</p>
+<form action="offer/{{ x.section_ID }}" method="post">
+    {% csrf_token %}
+    Instructor Name:<br>
+    <input name="instructor_name">
+    <br><br>
+    <input type="submit" value="Submit">
+    {% endfor %}
+    </form>
+
+
+
+{%endblock%}
