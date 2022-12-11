@@ -13,6 +13,7 @@
 
 {% for x in query %}
     <h2 class="card-title">{{ x.student_name }}</h2>
+			{% csrf_token %}
 			<p>Department: {{ x.department_name }}</p>
 			<p>Major: {{ x.major }}</p>
 			<p>Batch Year: {{ x.batch_year }}</p>
