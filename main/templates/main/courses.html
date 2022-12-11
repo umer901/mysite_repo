@@ -20,7 +20,7 @@
 			{% if Dep.last_name == 'Department' %}
 			{% if course.department_name == Dep.first_name %}
 			<h2 class="card-title">{{ course.course_name }}</h2>
-<!-- 			<p>Section: {{ course.section_name }}</p> -->
+			<!--<p>Section: {{ course.section_name }}</p> -->
 			<p>Taught By: {{ course.instructor_name }}</p>
 			<p>Credit Hours: {{ course.credit_hours }}</p>
 			<p>Department Name: {{ course.department_name }}</p>
@@ -31,7 +31,7 @@
 			{% endif %}
 			{% else %}
 			<h2 class="card-title">{{ course.course_name }}</h2>
-			<p>Section: {{ course.section_name }}</p>
+			<!-- <p>Section: {{ course.section_name }}</p> -->
 			<p>Taught By: {{ course.instructor_name }}</p>
 			<p>Credit Hours: {{ course.credit_hours }}</p>
 			<p>Department Name: {{ course.department_name }}</p>
