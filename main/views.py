@@ -125,7 +125,7 @@ def home(request):
     else:
         boolean = 'none'
 
-    q = "select id,section.section_ID, course_name, timeslot.start_time, timeslot.end_time, section_name from section INNER JOIN main_user ON section.section_ID = main_user.course_id INNER JOIN courses ON section.course_ID = courses.course_ID INNER JOIN timeslot ON timeslot.section_ID = section.section_ID WHERE main_user.username = '"+username+"'"
+    q = "select id,section.section_ID, course_name, timeslot.start_time, timeslot.end_time, section.section_name from section INNER JOIN main_user ON section.section_ID = main_user.course_id INNER JOIN courses ON section.course_ID = courses.course_ID INNER JOIN timeslot ON timeslot.section_ID = section.section_ID WHERE main_user.username = '"+username+"'"
 
     q2 = Section.objects.raw(q)
 
@@ -134,7 +134,7 @@ def home(request):
     for p in ans:
         prof_name = "Proffessor " + str(p.first_name) + " " + str(p.last_name)
 
-    query3 = "select id, courses.instructor_id, Dep.section_ID, section_name, Dep.section_ID, department_name, courses.course_ID, prereqs_ID, prereqs_names, credit_hours, courses.course_name, start_time, end_time, instructor_name from Dep INNER JOIN section ON section.section_ID = Dep.section_ID INNER JOIN courses ON courses.course_ID = section.course_ID INNER JOIN prereqs ON courses.course_ID = prereqs.course_ID INNER JOIN timeslot ON timeslot.section_ID = section.section_ID WHERE instructor_name ='" + prof_name + "'"
+    query3 = "select id, courses.instructor_id, Dep.section_ID, section.section_name, Dep.section_ID, department_name, courses.course_ID, prereqs_ID, prereqs_names, credit_hours, courses.course_name, start_time, end_time, instructor_name from Dep INNER JOIN section ON section.section_ID = Dep.section_ID INNER JOIN courses ON courses.course_ID = section.course_ID INNER JOIN prereqs ON courses.course_ID = prereqs.course_ID INNER JOIN timeslot ON timeslot.section_ID = section.section_ID WHERE instructor_name ='" + prof_name + "'"
 
     q3 = Dep.objects.raw(query3)
 
@@ -146,7 +146,7 @@ def courses(request):
     if request.method == "POST":
         searched = request.POST['searched']
 
-        q= "select section.section_ID, section.instructor_id, courses.course_ID, timeslot_ID, section.section_ID, course_name, instructor_name, department_name, credit_hours, courses.semester, start_time, end_time, classroom.classroom_ID, building_name, classroom.room_number, section_name from section LEFT JOIN instructor on instructor.instructor_ID = section.instructor_ID LEFT JOIN courses ON courses.course_ID = section.course_ID LEFT JOIN timeslot ON timeslot.section_ID = section.section_ID LEFT JOIN classroom ON classroom.room_number = section.room_number where course_name LIKE'%"+searched+"%' OR instructor_name LIKE '%"+searched+"%' OR department_name LIKE '%"+searched+"%' OR credit_hours LIKE '%"+searched+"%'"
+        q= "select section.section_ID, section.instructor_id, courses.course_ID, timeslot_ID, section.section_ID, course_name, instructor_name, department_name, credit_hours, courses.semester, start_time, end_time, classroom.classroom_ID, building_name, classroom.room_number, section.section_name from section LEFT JOIN instructor on instructor.instructor_ID = section.instructor_ID LEFT JOIN courses ON courses.course_ID = section.course_ID LEFT JOIN timeslot ON timeslot.section_ID = section.section_ID LEFT JOIN classroom ON classroom.room_number = section.room_number where course_name LIKE'%"+searched+"%' OR instructor_name LIKE '%"+searched+"%' OR department_name LIKE '%"+searched+"%' OR credit_hours LIKE '%"+searched+"%'"
         
         query = Courses.objects.raw(q)
         
